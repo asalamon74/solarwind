@@ -6,14 +6,19 @@ export FSIZEY=3450
 
 cleanup() {
   rv=$?
+  rm -rf $TMPDIR
   exit $rv
 }
 
 trap cleanup INT TERM EXIT
 
+TMPROOTDIR="."
+TMPDIR="${TMPROOTDIR}/SOLARWIND.$$"
+mkdir "$TMPDIR" || { echo "CANNOT CREATE TEMPORARY FILE DIRECTORY"; exit 1; }
+
 findmiddle() {
-    convert $1.png -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:2 -morphology Close Disk:30 -bordercolor black -border 10x10 -fill white -floodfill +0+0 black $1_mask.png
-    trimbox=$(convert $1_mask.png -trim -format "%X %Y %@" info:);
+    convert $1.png -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:2 -morphology Close Disk:30 -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${TMPDIR}/$1_mask.png
+    trimbox=$(convert ${TMPDIR}/$1_mask.png -trim -format "%X %Y %@" info:);
     bsize=$(echo $trimbox | cut -f 3 -d ' ' | cut -f 1 -d '+')
     bsizex=$(echo $bsize | cut -f 1 -d 'x')
     bsizey=$(echo $bsize | cut -f 2 -d 'x')
@@ -29,13 +34,15 @@ findmiddle() {
     echo $1 $midx $midy
     TOPX=$(($midx-$FSIZEX/2))
     TOPY=$(($midy-$FSIZEY/2))
-    convert $1.png -crop ${FSIZEX}x${FSIZEY}+${TOPX}+${TOPY} +repage $1_cuta.png
+    convert $1.png -crop ${FSIZEX}x${FSIZEY}+${TOPX}+${TOPY} +repage ${TMPDIR}/$1_cuta.png
 }
+
+
 
 
 findmiddle $1
 
-convert $1_cuta.png \
+convert ${TMPDIR}/$1_cuta.png \
     \( -size ${FSIZEX}x${FSIZEY} radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
