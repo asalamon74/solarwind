@@ -1,6 +1,5 @@
 #!/bin/bash
 
-SIZE=2352
 export FSIZEX=2450
 export FSIZEY=3450
 
