@@ -31,14 +31,10 @@ findmiddle() {
 #    convert $1.png -fill none -stroke red -strokewidth 1 -draw "rectangle ${bx},${by} $(($bx+$bsizex)),$(($by+$bsizey))" $1_rect.png
     midx=$((${bx}+${bsizex}/2))
     midy=$((${by}+${bsizey}/2))
-    echo $1 $midx $midy
     TOPX=$(($midx-$FSIZEX/2))
     TOPY=$(($midy-$FSIZEY/2))
     convert $1.png -crop ${FSIZEX}x${FSIZEY}+${TOPX}+${TOPY} +repage ${TMPDIR}/$1_cuta.png
 }
-
-
-
 
 findmiddle $1
 
