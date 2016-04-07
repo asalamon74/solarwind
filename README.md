@@ -10,3 +10,8 @@ usage: solarwind.sh inputfile
 test1
 
 ![input](https://raw.githubusercontent.com/asalamon74/solarwind/gh-pages/sample_input_150.jpg)
+
+test2
+
+![input](../gh-pages/sample_input_150.jpg)
+
