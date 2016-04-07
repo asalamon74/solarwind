@@ -1,15 +1,22 @@
 #!/bin/bash
 
+SWTMPROOTDIR="."
+SWTMPDIR="${SWTMPROOTDIR}/SOLARWIND.$$"
+
 cleanup() {
   rv=$?
-  rm -rf $TMPDIR
+  rm -rf $SWTMPDIR
   exit $rv
 }
 
 trap cleanup INT TERM EXIT
 
 usage() {
-  echo usage: $(basename $0) inputfile
+    echo "Usage:"
+    echo "  $(basename $0) [-h] inputfile"
+    echo ""
+    echo "Options:"
+    echo "  -h, --help    display this help"
 }
 
 error() {
@@ -18,11 +25,32 @@ error() {
     exit 1
 }
 
-TMPROOTDIR="."
-TMPDIR="${TMPROOTDIR}/SOLARWIND.$$"
-mkdir "$TMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
+for i in "$@"
+do
+case $i in
+    -h|--help)
+    usage
+    exit
+    ;;
+    # --opendisk=*)
+    # OPENDISK="${i#*=}"
+    # shift # past argument=value
+    # ;;
+    # --default)
+    # DEFAULT=YES
+    # shift # past argument with no value
+    # ;;
+    *)
+    ;;
+esac
+done
 
+if [[ -n $1 ]]; then
 inputfile=$1
+fi
+
+mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
+
 
 [ "$inputfile" = "" ] && error "NO INPUT FILE SPECIFIED"
 
@@ -30,8 +58,8 @@ inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
 
 findmiddle() {
-    convert ${inputfile} -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:2 -morphology Close Disk:30 -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${TMPDIR}/${inputbase}_mask.png
-    trimbox=$(convert ${TMPDIR}/${inputbase}_mask.png -trim -format "%X %Y %@" info:);
+    convert ${inputfile} -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:2 -morphology Close Disk:30 -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${SWTMPDIR}/${inputbase}_mask.png
+    trimbox=$(convert ${SWTMPDIR}/${inputbase}_mask.png -trim -format "%X %Y %@" info:);
     bsize=$(echo $trimbox | cut -f 3 -d ' ' | cut -f 1 -d '+')
     bsizex=$(echo $bsize | cut -f 1 -d 'x')
     bsizey=$(echo $bsize | cut -f 2 -d 'x')
@@ -50,14 +78,12 @@ findmiddle() {
     fsizey=$((${midy} > ${iheight}-${midy} ? 2*(${iheight}-${midy}) : 2*${midy}))
     TOPX=$(($midx-$fsizex/2))
     TOPY=$(($midy-$fsizey/2))
-    convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${TMPDIR}/${inputbase}_cuta.png
+    convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${SWTMPDIR}/${inputbase}_cuta.png
 }
-
-exit 2
 
 findmiddle $1
 
-convert ${TMPDIR}/${inputbase}_cuta.png \
+convert ${SWTMPDIR}/${inputbase}_cuta.png \
     \( -size ${fsizex}x${fsizey} radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
