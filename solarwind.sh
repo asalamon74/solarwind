@@ -8,13 +8,23 @@ cleanup() {
 
 trap cleanup INT TERM EXIT
 
+usage() {
+  echo usage: $(basename $0) inputfile
+}
+
+error() {
+    echo $1
+    usage
+    exit 1
+}
+
 TMPROOTDIR="."
 TMPDIR="${TMPROOTDIR}/SOLARWIND.$$"
-mkdir "$TMPDIR" || { echo "CANNOT CREATE TEMPORARY FILE DIRECTORY"; exit 1; }
+mkdir "$TMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 
 inputfile=$1
 
-[ "$inputfile" = "" ] && { echo "NO INPUT FILE SPECIFIED"; exit 1; }
+[ "$inputfile" = "" ] && error "NO INPUT FILE SPECIFIED"
 
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
@@ -42,6 +52,8 @@ findmiddle() {
     TOPY=$(($midy-$fsizey/2))
     convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${TMPDIR}/${inputbase}_cuta.png
 }
+
+exit 2
 
 findmiddle $1
 
