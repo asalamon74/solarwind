@@ -13,10 +13,12 @@ trap cleanup INT TERM EXIT
 
 usage() {
     echo "Usage:"
-    echo "  $(basename $0) [-h] inputfile"
+    echo "  $(basename $0) [options] inputfile"
     echo ""
     echo "Options:"
-    echo "  -h, --help    display this help"
+    echo "  -h, --help                display this help"
+    echo "      --opendisk=radius     radius of the opendisk"
+    echo "      --closedisk=radius    radius of the closedisk"
 }
 
 error() {
@@ -25,6 +27,10 @@ error() {
     exit 1
 }
 
+# defaults
+opendisk=2
+closedisk=30
+
 for i in "$@"
 do
 case $i in
@@ -32,15 +38,22 @@ case $i in
     usage
     exit
     ;;
-    # --opendisk=*)
-    # OPENDISK="${i#*=}"
-    # shift # past argument=value
-    # ;;
+    --opendisk=*)
+    opendisk="${i#*=}"
+    shift # past argument=value
+    ;;
+    --closedisk=*)
+    closedisk="${i#*=}"
+    shift # past argument=value
+    ;;
     # --default)
     # DEFAULT=YES
     # shift # past argument with no value
     # ;;
-    *)
+    -*)
+    echo "Unknown option"
+    usage
+    exit 1
     ;;
 esac
 done
@@ -58,7 +71,7 @@ inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
 
 findmiddle() {
-    convert ${inputfile} -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:2 -morphology Close Disk:30 -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${SWTMPDIR}/${inputbase}_mask.png
+    convert ${inputfile} -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:${opendisk} -morphology Close Disk:${closedisk} -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${SWTMPDIR}/${inputbase}_mask.png
     trimbox=$(convert ${SWTMPDIR}/${inputbase}_mask.png -trim -format "%X %Y %@" info:);
     bsize=$(echo $trimbox | cut -f 3 -d ' ' | cut -f 1 -d '+')
     bsizex=$(echo $bsize | cut -f 1 -d 'x')
