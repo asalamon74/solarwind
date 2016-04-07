@@ -9,5 +9,5 @@ usage: solarwind.sh inputfile
 
 |Input|Output|
 |-----|------|
-|[![input](../gh-pages/sample_input_150.jpg)](../gh-pages/sample_input_1000.jpg)|[![output](../gh-pages/sample_output_150.jpg)](../gh-pages/sample_output_1000.jpg)|
+|[![input](../gh-pages/sample_input_300.jpg)](../gh-pages/sample_input_1000.jpg)|[![output](../gh-pages/sample_output_300.jpg)](../gh-pages/sample_output_1000.jpg)|
 
