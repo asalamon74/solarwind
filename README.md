@@ -7,5 +7,7 @@ usage: solarwind.sh inputfile
 
 ## Sample
 
-![input](../gh-pages/sample_input_150.jpg) &rarr;
+|Input|Output|
+|-----|------|
+|![input](../gh-pages/sample_input_150.jpg)|aaa|
 
