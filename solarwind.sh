@@ -1,8 +1,5 @@
 #!/bin/bash
 
-export FSIZEX=2450
-export FSIZEY=3450
-
 cleanup() {
   rv=$?
   rm -rf $TMPDIR
@@ -37,15 +34,19 @@ findmiddle() {
 #    convert $1.png -fill none -stroke red -strokewidth 1 -draw "rectangle ${bx},${by} $(($bx+$bsizex)),$(($by+$bsizey))" $1_rect.png
     midx=$((${bx}+${bsizex}/2))
     midy=$((${by}+${bsizey}/2))
-    TOPX=$(($midx-$FSIZEX/2))
-    TOPY=$(($midy-$FSIZEY/2))
-    convert ${inputfile} -crop ${FSIZEX}x${FSIZEY}+${TOPX}+${TOPY} +repage ${TMPDIR}/${inputbase}_cuta.png
+    iwidth=$(identify -ping -format "%w" ${inputfile})
+    iheight=$(identify -ping -format "%h" ${inputfile})
+    fsizex=$((${midx} > ${iwidth}-${midx} ? 2*(${iwidth}-${midx}) : 2*${midx}))
+    fsizey=$((${midy} > ${iheight}-${midy} ? 2*(${iheight}-${midy}) : 2*${midy}))
+    TOPX=$(($midx-$fsizex/2))
+    TOPY=$(($midy-$fsizey/2))
+    convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${TMPDIR}/${inputbase}_cuta.png
 }
 
 findmiddle $1
 
 convert ${TMPDIR}/${inputbase}_cuta.png \
-    \( -size ${FSIZEX}x${FSIZEY} radial-gradient:black-white -gamma 0.3 \) \
+    \( -size ${fsizex}x${fsizey} radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
     \( -clone 0 -clone 2 -compose Minus -composite \) \
