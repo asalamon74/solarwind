@@ -2,7 +2,13 @@
 Total solar eclipse corona/solarwind enhancer
 
 ```
-usage: solarwind.sh inputfile outputfile
+Usage: solarwind.sh inputfile outputfile
+
+Options:
+  -h, --help                display this help
+      --opendisk=radius     radius of the opendisk
+      --closedisk=radius    radius of the closedisk
+
 ```
 
 ## Sample
@@ -17,4 +23,10 @@ Automatic symmetric positioning of total solar eclipse corona images
 
 ```
 usage: solarmiddle.sh inputfile outputfile
+
+Options:
+  -h, --help                display this help
+      --opendisk=radius     radius of the opendisk
+      --closedisk=radius    radius of the closedisk
+
 ```
