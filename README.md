@@ -22,7 +22,7 @@ Options:
 Automatic symmetric positioning of total solar eclipse corona images
 
 ```
-usage: solarmiddle.sh inputfile outputfile
+Usage: solarmiddle.sh inputfile outputfile
 
 Options:
   -h, --help                display this help
