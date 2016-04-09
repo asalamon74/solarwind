@@ -13,7 +13,7 @@ trap cleanup INT TERM EXIT
 
 usage() {
     echo "Usage:"
-    echo "  $(basename $0) [options] inputfile"
+    echo "  $(basename $0) [options] inputfile outputfile"
     echo ""
     echo "Options:"
     echo "  -h, --help                display this help"
@@ -62,19 +62,25 @@ if [[ -n $1 ]]; then
 inputfile=$1
 fi
 
+if [[ -n $2 ]]; then
+outputfile=$2
+fi
+
 mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 
 
 [ "$inputfile" = "" ] && error "NO INPUT FILE SPECIFIED"
+[ "$outputfile" = "" ] && error "NO OUTPUT FILE SPECIFIED"
+
 
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
 
 MYDIR="$(dirname "$(realpath "$0")")"
 
-${MYDIR}/solarmiddle.sh --opendisk=${opendisk} --closedisk=${closedisk} $1
+${MYDIR}/solarmiddle.sh --opendisk=${opendisk} --closedisk=${closedisk} $1 ${SWTMPDIR}/${inputbase}_cuta.png || error "CANNOT POSITION IMAGE"
 
-convert ${inputbase}_cuta.png \
+convert ${SWTMPDIR}/${inputbase}_cuta.png \
     \( -size ${fsizex}x${fsizey} radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
@@ -93,4 +99,4 @@ convert ${inputbase}_cuta.png \
     \( -clone 9 +clone -compose Multiply -composite -auto-level \) \
     \( +clone -clone 10 -compose Plus -composite \) \
     -delete 0--2 \
-${inputbase}_swa.png
+${outputfile}

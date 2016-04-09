@@ -13,7 +13,7 @@ trap cleanup INT TERM EXIT
 
 usage() {
     echo "Usage:"
-    echo "  $(basename $0) [options] inputfile"
+    echo "  $(basename $0) [options] inputfile outputfile"
     echo ""
     echo "Options:"
     echo "  -h, --help                display this help"
@@ -62,10 +62,15 @@ if [[ -n $1 ]]; then
 inputfile=$1
 fi
 
+if [[ -n $2 ]]; then
+outputfile=$2
+fi
+
 mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 
 
 [ "$inputfile" = "" ] && error "NO INPUT FILE SPECIFIED"
+[ "$outputfile" = "" ] && error "NO OUTPUT FILE SPECIFIED"
 
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
@@ -89,7 +94,7 @@ fsizex=$((${midx} > ${iwidth}-${midx} ? 2*(${iwidth}-${midx}) : 2*${midx}))
 fsizey=$((${midy} > ${iheight}-${midy} ? 2*(${iheight}-${midy}) : 2*${midy}))
 TOPX=$(($midx-$fsizex/2))
 TOPY=$(($midy-$fsizey/2))
-convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${inputbase}_cuta.png
+convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${outputfile}
 
 
 

@@ -2,7 +2,7 @@
 Total solar eclipse corona/solarwind enhancer
 
 ```
-usage: solarwind.sh inputfile
+usage: solarwind.sh inputfile outputfile
 ```
 
 ## Sample
@@ -16,5 +16,5 @@ usage: solarwind.sh inputfile
 Automatic symmetric positioning of total solar eclipse corona images
 
 ```
-usage: solarmiddle.sh inputfile
+usage: solarmiddle.sh inputfile outputfile
 ```
