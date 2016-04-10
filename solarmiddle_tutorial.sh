@@ -28,7 +28,7 @@ fsizex=$((${midx} > ${iwidth}-${midx} ? 2*(${iwidth}-${midx}) : 2*${midx}))
 fsizey=$((${midy} > ${iheight}-${midy} ? 2*(${iheight}-${midy}) : 2*${midy}))
 TOPX=$(($midx-$fsizex/2))
 TOPY=$(($midy-$fsizey/2))
-convert solarmiddle_step08.png -fill none -stroke red -strokewidth 3 -draw "rectangle $((${bx}+10)),$((${by}+10)), $(($bx+$bsizex+10)),$(($by+$bsizey+10)) line $(($bx+$bsizex+10)),$((${by}+10)), $((${bx}+10)),$(($by+$bsizey+10)) line $((${bx}+10)),$((${by}+10)), $(($bx+$bsizex+10)),$(($by+$bsizey+10))" solarmiddle_step09.png
-convert ${inputfile} -fill none -stroke blue -strokewidth 3 -draw "rectangle ${TOPX},${TOPY} $((${fsizex}+${TOPX})),$((${fsizey}+${TOPY}))" solarmiddle_step10.png
+convert solarmiddle_step08.png -fill none -stroke red -strokewidth 5 -draw "rectangle $((${bx}+10)),$((${by}+10)), $(($bx+$bsizex+10)),$(($by+$bsizey+10)) line $(($bx+$bsizex+10)),$((${by}+10)), $((${bx}+10)),$(($by+$bsizey+10)) line $((${bx}+10)),$((${by}+10)), $(($bx+$bsizex+10)),$(($by+$bsizey+10))" solarmiddle_step09.png
+convert ${inputfile} -fill none -stroke blue -strokewidth 5 -draw "rectangle ${TOPX},${TOPY} $((${fsizex}+${TOPX})),$((${fsizey}+${TOPY}))" solarmiddle_step10.png
 
 
