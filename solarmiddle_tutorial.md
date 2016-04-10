@@ -1,6 +1,7 @@
 # solarmiddle tutorial
 
-Automatic symmetric positioning of total solar eclipse corona images
+This [imagemagick](http://www.imagemagick.org) script automatically positiones total solar eclipse
+corona images. This script is used by [solarwind](README.md) script.
 
 ## Steps of processing
 
