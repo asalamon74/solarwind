@@ -19,7 +19,8 @@ Options:
 
 # solarmiddle
 
-Automatic symmetric positioning of total solar eclipse corona images
+Automatic symmetric positioning of total solar eclipse corona
+images. The steps of the script is described [here](solarmiddle_tutorial.md).
 
 ```
 Usage: solarmiddle.sh inputfile outputfile
