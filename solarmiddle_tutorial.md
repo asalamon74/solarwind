@@ -17,4 +17,8 @@ Automatic symmetric positioning of total solar eclipse corona images
 |[![output](../gh-pages/solarmiddle_step06_300.jpg)](../gh-pages/solarmiddle_step06_1000.jpg)|[![output](../gh-pages/solarmiddle_step07_300.jpg)](../gh-pages/solarmiddle_step07_1000.jpg)|[![output](../gh-pages/solarmiddle_step08_300.jpg)](../gh-pages/solarmiddle_step08_1000.jpg)|
 |Remove black dots|Add black border|Floodfill|
 |-morphology Close Disk:30|-bordercolor black<br />-border 10x10|-fill white<br /> -floodfill +0+0<br /> black|
+|**Step 9**|**Step 10**|**Step 11**|
+|[![output](../gh-pages/solarmiddle_step09_300.jpg)](../gh-pages/solarmiddle_step09_1000.jpg)|[![output](../gh-pages/solarmiddle_step10_300.jpg)](../gh-pages/solarmiddle_step10_1000.jpg)|[![output](../gh-pages/solarmiddle_step11_300.jpg)](../gh-pages/solarmiddle_step11_1000.jpg)|
+|Find black circle|x|x|
+|-trim<br />-format "%X %Y %@"<br />info:|x|x|
 
