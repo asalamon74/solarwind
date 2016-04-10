@@ -9,8 +9,7 @@ Automatic symmetric positioning of total solar eclipse corona images
 |[![input](../gh-pages/sample_input_300.jpg)](../gh-pages/sample_input_1000.jpg)|[![output](../gh-pages/solarmiddle_step01_300.jpg)](../gh-pages/solarmiddle_step01_1000.jpg)|[![output](../gh-pages/solarmiddle_step02_300.jpg)](../gh-pages/solarmiddle_step02_1000.jpg)|
 |Original image|Grayscale|Two-color|
 ||-colorspace gray|-auto-level<br />-modulate 5000<br />+dither<br/>-colors 2<br />-contrast-stretch 0|
-|------|------|------|
-|Step 3|Step 4|Step 5|
+|**Step 3**|**Step 4**|**Step 5**|
 
 
 
