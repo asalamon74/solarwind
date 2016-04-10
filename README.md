@@ -1,32 +1,7 @@
 # solarwind
-Total solar eclipse corona/solarwind enhancer
+Total solar eclipse corona/solarwind enhancer. More details can be
+found at the [master branch](../master/README.md).
 
-```
-Usage: solarwind.sh inputfile outputfile
+## tutorial branch
+This branch creates the tutorial images to be used for presentation.
 
-Options:
-  -h, --help                display this help
-      --opendisk=radius     radius of the opendisk
-      --closedisk=radius    radius of the closedisk
-
-```
-
-## Sample
-
-|Input|Output|
-|-----|------|
-|[![input](../gh-pages/sample_input_300.jpg)](../gh-pages/sample_input_1000.jpg)|[![output](../gh-pages/sample_output_300.jpg)](../gh-pages/sample_output_1000.jpg)|
-
-# solarmiddle
-
-Automatic symmetric positioning of total solar eclipse corona images
-
-```
-Usage: solarmiddle.sh inputfile outputfile
-
-Options:
-  -h, --help                display this help
-      --opendisk=radius     radius of the opendisk
-      --closedisk=radius    radius of the closedisk
-
-```
