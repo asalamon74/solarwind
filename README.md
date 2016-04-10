@@ -1,14 +1,13 @@
 # solarwind
-Total solar eclipse corona/solarwind enhancer
+Total solar eclipse corona/solarwind enhancer [imagemagick](http://www.imagemagick.org) script.
 
 ```
-Usage: solarwind.sh inputfile outputfile
+Usage: solarwind.sh [options] inputfile outputfile
 
 Options:
   -h, --help                display this help
       --opendisk=radius     radius of the opendisk
       --closedisk=radius    radius of the closedisk
-
 ```
 
 ## Sample
@@ -19,15 +18,13 @@ Options:
 
 # solarmiddle
 
-Automatic symmetric positioning of total solar eclipse corona
-images. The steps of the script is described [here](solarmiddle_tutorial.md).
+The package also contains the solarmiddle script which automatically positiones total solar eclipse corona images. The steps of the script are described [here](solarmiddle_tutorial.md).
 
 ```
-Usage: solarmiddle.sh inputfile outputfile
+Usage: solarmiddle.sh [options] inputfile outputfile
 
 Options:
   -h, --help                display this help
       --opendisk=radius     radius of the opendisk
       --closedisk=radius    radius of the closedisk
-
 ```
