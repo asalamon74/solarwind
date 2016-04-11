@@ -1,5 +1,5 @@
 # solarwind
-Total solar eclipse corona/solarwind enhancer [imagemagick](http://www.imagemagick.org) script.
+Total solar eclipse corona/solarwind enhancer [imagemagick](http://www.imagemagick.org) script. The steps of the script are described [here](solarwind_tutorial.md).
 
 ```
 Usage: solarwind.sh [options] inputfile outputfile
