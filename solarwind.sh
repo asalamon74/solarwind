@@ -19,6 +19,7 @@ usage() {
     echo "  -h, --help                display this help"
     echo "      --opendisk=radius     radius of the opendisk"
     echo "      --closedisk=radius    radius of the closedisk"
+    echo "      --radialblur=angle    angle of the radial blur"
 }
 
 error() {
@@ -30,6 +31,7 @@ error() {
 # defaults
 opendisk=2
 closedisk=30
+radialblur=10
 
 for i in "$@"
 do
@@ -46,12 +48,16 @@ case $i in
     closedisk="${i#*=}"
     shift # past argument=value
     ;;
+    --radialblur=*)
+    radialblur="${i#*=}"
+    shift # past argument=value
+    ;;
     # --default)
     # DEFAULT=YES
     # shift # past argument with no value
     # ;;
     -*)
-    echo "Unknown option"
+    echo "Unknown option $1"
     usage
     exit 1
     ;;
@@ -96,7 +102,7 @@ convert ${SWTMPDIR}/${inputbase}_cuta.png \
     \( -clone 6 -clone 0 -compose Multiply -composite \) \
     \( -clone 4 -colorspace gray \) \
     \( -clone 2 +clone -compose Mathematics -set option:compose:args 0,-2.5,1,0 -composite \) \
-    \( +clone -radial-blur 10 \) \
+    \( +clone -radial-blur ${radialblur} \) \
     \( -clone -2 +clone -type TrueColor -compose Mathematics -set option:compose:args 0,-1,1,0.5 -composite \) \
     \( +clone -level 40%,60% -clamp +level 20%,80% \) \
     \( -clone 9 +clone -compose Multiply -composite -auto-level \) \

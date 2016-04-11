@@ -5,7 +5,7 @@ corona images. This script is used by [solarwind](README.md) script.
 
 ## Steps of processing
 
-_Images are created using the default values of the script_.
+_Sample images are created using the default values of the script_.
 
 |Step 0|Step 1|Step 2|
 |------|------|------|

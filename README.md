@@ -8,6 +8,7 @@ Options:
   -h, --help                display this help
       --opendisk=radius     radius of the opendisk
       --closedisk=radius    radius of the closedisk
+      --radialblur=angle    angle of the radial bluar
 ```
 
 ## Sample
