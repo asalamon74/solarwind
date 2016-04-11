@@ -1,5 +1,12 @@
 # solarwind tutorial
 
+The usage of the script can be found [here](README.md).
+
+This [imagemagick](http://www.imagemagick.org) script emphasizes the corona details using the followings:
+
+* A radial gradient filter changes the brightness of the corona based on the difference from the sun's limb.
+* The difference of the original image and the radial blur of the image is used to show more corona details (similarly to the Pellett-method)
+* The protuberance is taken from the original image.
 
 ## Steps of processing
 
