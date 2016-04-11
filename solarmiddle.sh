@@ -51,7 +51,7 @@ case $i in
     # shift # past argument with no value
     # ;;
     -*)
-    echo "Unknown option"
+    echo "Unknown option $1"
     usage
     exit 1
     ;;
