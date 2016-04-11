@@ -16,7 +16,7 @@ The script calls [solarmiddle.sh](solarmiddle.sh) and positions the Sun to the m
 |----|-----------|-----------|-----|
 |Input|Already positioned input image||[![input](../gh-pages/solarwind_step00_300.jpg)](../gh-pages/solarwind_step00_1000.jpg)|
 |Image 1|Generated radial-gradient|-size ${fsizex}x${fsizey} radial-gradient:black-white -gamma 0.3|[![input](../gh-pages/solarwind_step01_300.jpg)](../gh-pages/solarwind_step01_1000.jpg)|
-|Image 2|Grayscale of input (step 1) image|-clone 0 -colorspace gray|[![input](../gh-pages/solarwind_step02_300.jpg)](../gh-pages/solarwind_step02_1000.jpg)|
+|Image 2|Grayscale of input image|-clone 0 -colorspace gray|[![input](../gh-pages/solarwind_step02_300.jpg)](../gh-pages/solarwind_step02_1000.jpg)|
 |Image 3|Multiply and normalize previous two images| -clone 0 -clone 1 -compose Multiply -composite -normalize|[![input](../gh-pages/solarwind_step03_300.jpg)](../gh-pages/solarwind_step03_1000.jpg)|
 |Image 4|Difference of original (Input) and grayscale (Image 2) images| -clone 0 -clone 2 -compose Minus -composite|[![input](../gh-pages/solarwind_step04_300.jpg)](../gh-pages/solarwind_step04_1000.jpg)|
 |Image 5|Creating mask from the previous (Image 5) image|+clone -auto-level -modulate 200 +dither -colors 2 -colorspace gray -contrast-stretch 0|[![input](../gh-pages/solarwind_step05_300.jpg)](../gh-pages/solarwind_step05_1000.jpg)|
