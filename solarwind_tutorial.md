@@ -10,6 +10,8 @@ This [imagemagick](http://www.imagemagick.org) script emphasizes the corona deta
 
 ## Steps of processing
 
+The script calls [solarmiddle.sh](solarmiddle.sh) and positions the Sun to the middle of the image. The steps of the positioning script are described [here](solarmiddle_tutorial.md).
+
 |Step|Description|Imagemagick|Image|
 |----|-----------|-----------|-----|
 |Input|Already positioned input image||[![input](../gh-pages/solarwind_step00_300.jpg)](../gh-pages/solarwind_step00_1000.jpg)|
