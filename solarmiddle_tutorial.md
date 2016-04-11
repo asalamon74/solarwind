@@ -5,6 +5,8 @@ corona images. This script is used by [solarwind](README.md) script.
 
 ## Steps of processing
 
+_Images are created using the default values of the script_.
+
 |Step 0|Step 1|Step 2|
 |------|------|------|
 |[![input](../gh-pages/sample_input_300.jpg)](../gh-pages/sample_input_1000.jpg)|[![output](../gh-pages/solarmiddle_step01_300.jpg)](../gh-pages/solarmiddle_step01_1000.jpg)|[![output](../gh-pages/solarmiddle_step02_300.jpg)](../gh-pages/solarmiddle_step02_1000.jpg)|
