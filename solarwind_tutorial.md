@@ -19,7 +19,7 @@ The script calls [solarmiddle.sh](solarmiddle.sh) and positions the Sun to the m
 |Image 2|Grayscale of input image|-clone 0 -colorspace gray|[![input](../gh-pages/solarwind_step02_300.jpg)](../gh-pages/solarwind_step02_1000.jpg)|
 |Image 3|Multiply and normalize previous two images| -clone 0 -clone 1 -compose Multiply -composite -normalize|[![input](../gh-pages/solarwind_step03_300.jpg)](../gh-pages/solarwind_step03_1000.jpg)|
 |Image 4|Difference of original (Input) and grayscale (Image 2) images| -clone 0 -clone 2 -compose Minus -composite|[![input](../gh-pages/solarwind_step04_300.jpg)](../gh-pages/solarwind_step04_1000.jpg)|
-|Image 5|Creating mask from the previous (Image 5) image|+clone -auto-level -modulate 200 +dither -colors 2 -colorspace gray -contrast-stretch 0|[![input](../gh-pages/solarwind_step05_300.jpg)](../gh-pages/solarwind_step05_1000.jpg)|
+|Image 5|Creating mask from the previous image|+clone -auto-level -modulate 200 +dither -colors 2 -colorspace gray -contrast-stretch 0|[![input](../gh-pages/solarwind_step05_300.jpg)](../gh-pages/solarwind_step05_1000.jpg)|
 |Image 6|Blur the mask|+clone -blur 20x20|[![input](../gh-pages/solarwind_step06_300.jpg)](../gh-pages/solarwind_step06_1000.jpg)|
 |Image 7|Negate the mask (image 5)| -clone 5 -negate|[![input](../gh-pages/solarwind_step07_300.jpg)](../gh-pages/solarwind_step07_1000.jpg)|
 |Image 8|Blur the negated mask (image 7)|+clone -blur 20x20|[![input](../gh-pages/solarwind_step08_300.jpg)](../gh-pages/solarwind_step08_1000.jpg)|
