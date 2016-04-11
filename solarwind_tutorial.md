@@ -24,7 +24,7 @@ The script calls [solarmiddle.sh](solarmiddle.sh) and positions the Sun to the m
 |Image 7|Negate the mask (image 5)| -clone 5 -negate|[![input](../gh-pages/solarwind_step07_300.jpg)](../gh-pages/solarwind_step07_1000.jpg)|
 |Image 8|Blur the negated mask (image 7)|+clone -blur 20x20|[![input](../gh-pages/solarwind_step08_300.jpg)](../gh-pages/solarwind_step08_1000.jpg)|
 |Image 9|Apply the blurred mask to cut out the protuberance|+clone -clone 3 -compose Multiply -composite|[![input](../gh-pages/solarwind_step09_300.jpg)](../gh-pages/solarwind_step09_1000.jpg)|
-|Image 10|Apply the negated mask to show the protuberance|-clone 6 -clone 0 -compose Multiply -composite|[![input](../gh-pages/solarwind_step10_300.jpg)](../gh-pages/solarwind_step10_1000.jpg)|
+|Image 10|Apply the negated mask to the input image to show the protuberance|-clone 6 -clone 0 -compose Multiply -composite|[![input](../gh-pages/solarwind_step10_300.jpg)](../gh-pages/solarwind_step10_1000.jpg)|
 |Image 11|Grayscale version of the protuberance difference|-clone 4 -colorspace gray|[![input](../gh-pages/solarwind_step11_300.jpg)](../gh-pages/solarwind_step11_1000.jpg)|
 |Image 12|Fade out the protuberance| -clone 2 +clone -compose Mathematics -set option:compose:args 0,-2.5,1,0 -composite|[![input](../gh-pages/solarwind_step12_300.jpg)](../gh-pages/solarwind_step12_1000.jpg)|
 |Image 13|Radial blur of the previous image|+clone -radial-blur 10|[![input](../gh-pages/solarwind_step13_300.jpg)](../gh-pages/solarwind_step13_1000.jpg)|
