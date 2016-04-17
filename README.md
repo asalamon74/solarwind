@@ -5,10 +5,11 @@ Total solar eclipse corona/solarwind enhancer [imagemagick](http://www.imagemagi
 Usage: solarwind.sh [options] inputfile outputfile
 
 Options:
-  -h, --help                display this help
-      --opendisk=radius     radius of the opendisk
-      --closedisk=radius    radius of the closedisk
-      --radialblur=angle    angle of the radial bluar
+  -h, --help                  display this help
+      --opendisk=radius       radius of the opendisk
+      --closedisk=radius      radius of the closedisk
+      --radialblur=angle      angle of the radial bluar
+      --middleoutputfile=file if specified the middle positioned image will also be saved
 ```
 
 ## Sample

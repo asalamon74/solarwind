@@ -16,10 +16,11 @@ usage() {
     echo "  $(basename $0) [options] inputfile outputfile"
     echo ""
     echo "Options:"
-    echo "  -h, --help                display this help"
-    echo "      --opendisk=radius     radius of the opendisk"
-    echo "      --closedisk=radius    radius of the closedisk"
-    echo "      --radialblur=angle    angle of the radial blur"
+    echo "  -h, --help                  display this help"
+    echo "      --opendisk=radius       radius of the opendisk"
+    echo "      --closedisk=radius      radius of the closedisk"
+    echo "      --radialblur=angle      angle of the radial blur"
+    echo "      --middleoutputfile=file if specified the middle positioned image will also be saved"
 }
 
 error() {
@@ -50,6 +51,10 @@ case $i in
     ;;
     --radialblur=*)
     radialblur="${i#*=}"
+    shift # past argument=value
+    ;;
+    --middleoutputfile=*)
+    middleoutputfile="${i#*=}"
     shift # past argument=value
     ;;
     # --default)
@@ -109,3 +114,7 @@ convert ${SWTMPDIR}/${inputbase}_cuta.png \
     \( +clone -clone 10 -compose Plus -composite \) \
     -delete 0--2 \
 ${outputfile}
+
+if [ -n "$middleoutputfile" ]; then
+    mv ${SWTMPDIR}/${inputbase}_cuta.png $middleoutputfile
+fi
