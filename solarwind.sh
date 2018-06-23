@@ -24,7 +24,7 @@ usage() {
 }
 
 error() {
-    echo $1
+    echo "$1"
     usage
     exit 1
 }
