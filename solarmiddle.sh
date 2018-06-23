@@ -88,10 +88,10 @@ bx=$((bx+bx2-10))
 by=$((by+by2-10))
 midx=$((bx+bsizex/2))
 midy=$((by+bsizey/2))
-iwidth=$(identify -ping -format "%w" ${inputfile})
-iheight=$(identify -ping -format "%h" ${inputfile})
+iwidth=$(identify -ping -format "%w" "${inputfile}")
+iheight=$(identify -ping -format "%h" "${inputfile}")
 fsizex=$((${midx} > ${iwidth}-${midx} ? 2*(${iwidth}-${midx}) : 2*${midx}))
 fsizey=$((${midy} > ${iheight}-${midy} ? 2*(${iheight}-${midy}) : 2*${midy}))
 TOPX=$((midx-fsizex/2))
 TOPY=$((midy-fsizey/2))
-convert ${inputfile} -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage ${outputfile}
+convert "${inputfile}" -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage "${outputfile}"
