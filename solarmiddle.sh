@@ -75,8 +75,8 @@ mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
 
-convert ${inputfile} -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:${opendisk} -morphology Close Disk:${closedisk} -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${SWTMPDIR}/${inputbase}_mask.png
-trimbox=$(convert ${SWTMPDIR}/${inputbase}_mask.png -trim -format "%X %Y %@" info:);
+convert "${inputfile}" -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:${opendisk} -morphology Close Disk:${closedisk} -bordercolor black -border 10x10 -fill white -floodfill +0+0 black ${SWTMPDIR}/${inputbase}_mask.png
+trimbox=$(convert "${SWTMPDIR}/${inputbase}_mask.png" -trim -format "%X %Y %@" info:);
 bsize=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 1 -d '+')
 bsizex=$(echo "$bsize" | cut -f 1 -d 'x')
 bsizey=$(echo "$bsize" | cut -f 2 -d 'x')
