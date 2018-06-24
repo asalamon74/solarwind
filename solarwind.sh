@@ -95,7 +95,7 @@ fsizex=$(identify -ping -format "%w" "${SWTMPDIR}/${inputbase}_cuta.png")
 fsizey=$(identify -ping -format "%h" "${SWTMPDIR}/${inputbase}_cuta.png")
 
 convert "${SWTMPDIR}/${inputbase}_cuta.png" \
-    \( -size ${fsizex}x${fsizey} radial-gradient:black-white -gamma 0.3 \) \
+    \( -size "${fsizex}"x"${fsizey}" radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
     \( -clone 0 -clone 2 -compose Minus -composite \) \
@@ -116,5 +116,5 @@ convert "${SWTMPDIR}/${inputbase}_cuta.png" \
 "${outputfile}"
 
 if [ -n "$middleoutputfile" ]; then
-    mv ${SWTMPDIR}/${inputbase}_cuta.png $middleoutputfile
+    mv "${SWTMPDIR}/${inputbase}_cuta.png" "$middleoutputfile"
 fi
