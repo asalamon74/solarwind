@@ -13,7 +13,7 @@ trap cleanup INT TERM EXIT
 
 usage() {
     echo "Usage:"
-    echo "  $(basename $0) [options] inputfile outputfile"
+    echo "  $(basename "$0") [options] inputfile outputfile"
     echo ""
     echo "Options:"
     echo "  -h, --help                  display this help"
@@ -91,10 +91,10 @@ MYDIR="$(dirname "$(realpath "$0")")"
 
 ${MYDIR}/solarmiddle.sh --opendisk=${opendisk} --closedisk=${closedisk} $1 ${SWTMPDIR}/${inputbase}_cuta.png || error "CANNOT POSITION IMAGE"
 
-fsizex=$(identify -ping -format "%w" ${SWTMPDIR}/${inputbase}_cuta.png)
-fsizey=$(identify -ping -format "%h" ${SWTMPDIR}/${inputbase}_cuta.png)
+fsizex=$(identify -ping -format "%w" "${SWTMPDIR}/${inputbase}_cuta.png")
+fsizey=$(identify -ping -format "%h" "${SWTMPDIR}/${inputbase}_cuta.png")
 
-convert ${SWTMPDIR}/${inputbase}_cuta.png \
+convert "${SWTMPDIR}/${inputbase}_cuta.png" \
     \( -size ${fsizex}x${fsizey} radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
@@ -107,13 +107,13 @@ convert ${SWTMPDIR}/${inputbase}_cuta.png \
     \( -clone 6 -clone 0 -compose Multiply -composite \) \
     \( -clone 4 -colorspace gray \) \
     \( -clone 2 +clone -compose Mathematics -set option:compose:args 0,-2.5,1,0 -composite \) \
-    \( +clone -radial-blur ${radialblur} \) \
+    \( +clone -radial-blur "${radialblur}" \) \
     \( -clone -2 +clone -type TrueColor -compose Mathematics -set option:compose:args 0,-1,1,0.5 -composite \) \
     \( +clone -level 40%,60% -clamp +level 20%,80% \) \
     \( -clone 9 +clone -compose Multiply -composite -auto-level \) \
     \( +clone -clone 10 -compose Plus -composite \) \
     -delete 0--2 \
-${outputfile}
+"${outputfile}"
 
 if [ -n "$middleoutputfile" ]; then
     mv ${SWTMPDIR}/${inputbase}_cuta.png $middleoutputfile
