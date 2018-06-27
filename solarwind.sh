@@ -94,11 +94,7 @@ inputbase=${inputbase%.*}
 
 MYDIR="$(dirname "$(realpath "$0")")"
 
-if [ -n "$middlestr" ]; then
-    middlearg="--middle=$middlestr"
-fi
-
-"${MYDIR}/solarmiddle.sh" --opendisk="${opendisk}" --closedisk="${closedisk}" ${middlearg} "$1" "${SWTMPDIR}/${inputbase}_cuta.png" || error "CANNOT POSITION IMAGE"
+"${MYDIR}/solarmiddle.sh" --opendisk="${opendisk}" --closedisk="${closedisk}" ${middlestr:+"--middle=$middlestr"} "$1" "${SWTMPDIR}/${inputbase}_cuta.png" || error "CANNOT POSITION IMAGE"
 
 fsizex=$(identify -ping -format "%w" "${SWTMPDIR}/${inputbase}_cuta.png")
 fsizey=$(identify -ping -format "%h" "${SWTMPDIR}/${inputbase}_cuta.png")
