@@ -17,6 +17,7 @@ usage() {
     echo ""
     echo "Options:"
     echo "  -h, --help                display this help"
+    echo "      --middle=x,y          manually specified middle position"
     echo "      --opendisk=radius     radius of the opendisk"
     echo "      --closedisk=radius    radius of the closedisk"
 }
@@ -44,6 +45,11 @@ case $i in
     ;;
     --closedisk=*)
     closedisk="${i#*=}"
+    shift # past argument=value
+    ;;
+    --middle=*)
+    middlestr="${i#*=}"
+    middlepos=(${middlestr//,/ })
     shift # past argument=value
     ;;
     # --default)
@@ -75,19 +81,24 @@ mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
 
-convert "${inputfile}" -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:"${opendisk}" -morphology Close Disk:"${closedisk}" -bordercolor black -border 10x10 -fill white -floodfill +0+0 black "${SWTMPDIR}/${inputbase}_mask.png"
-trimbox=$(convert "${SWTMPDIR}/${inputbase}_mask.png" -trim -format "%X %Y %@" info:);
-bsize=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 1 -d '+')
-bsizex=$(echo "$bsize" | cut -f 1 -d 'x')
-bsizey=$(echo "$bsize" | cut -f 2 -d 'x')
-bx=$(echo "$trimbox" | cut -f 1 -d ' ' | cut -f 2 -d '+')
-bx2=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 2 -d '+')
-by=$(echo "$trimbox" | cut -f 2 -d ' ' | cut -f 2 -d '+')
-by2=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 3 -d '+')
-bx=$((bx+bx2-10))
-by=$((by+by2-10))
-midx=$((bx+bsizex/2))
-midy=$((by+bsizey/2))
+if [ -z "${middlepos[0]}" ] || [ -z "${middlepos[1]}" ]; then
+    convert "${inputfile}" -colorspace gray -auto-level -modulate 5000 +dither -colors 2 -contrast-stretch 0 -morphology Open Disk:"${opendisk}" -morphology Close Disk:"${closedisk}" -bordercolor black -border 10x10 -fill white -floodfill +0+0 black "${SWTMPDIR}/${inputbase}_mask.png"
+    trimbox=$(convert "${SWTMPDIR}/${inputbase}_mask.png" -trim -format "%X %Y %@" info:);
+    bsize=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 1 -d '+')
+    bsizex=$(echo "$bsize" | cut -f 1 -d 'x')
+    bsizey=$(echo "$bsize" | cut -f 2 -d 'x')
+    bx=$(echo "$trimbox" | cut -f 1 -d ' ' | cut -f 2 -d '+')
+    bx2=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 2 -d '+')
+    by=$(echo "$trimbox" | cut -f 2 -d ' ' | cut -f 2 -d '+')
+    by2=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 3 -d '+')
+    bx=$((bx+bx2-10))
+    by=$((by+by2-10))
+    midx=$((bx+bsizex/2))
+    midy=$((by+bsizey/2))
+else
+    midx=${middlepos[0]}
+    midy=${middlepos[1]}
+fi
 iwidth=$(identify -ping -format "%w" "${inputfile}")
 iheight=$(identify -ping -format "%h" "${inputfile}")
 fsizex=$((midx > iwidth-midx ? 2*(iwidth-midx) : 2*midx))

@@ -8,6 +8,7 @@ Usage: solarwind.sh [options] inputfile outputfile
 
 Options:
   -h, --help                  display this help
+      --middle=x,y            manually specified middle position
       --opendisk=radius       radius of the opendisk
       --closedisk=radius      radius of the closedisk
       --radialblur=angle      angle of the radial bluar
@@ -23,12 +24,14 @@ Options:
 # solarmiddle
 
 The package also contains the solarmiddle script which automatically positiones total solar eclipse corona images. The steps of the script are described [here](solarmiddle_tutorial.md).
+It is also possible to specify the middle position manually using the `--middle` option.
 
 ```
 Usage: solarmiddle.sh [options] inputfile outputfile
 
 Options:
   -h, --help                display this help
+      --middle=x,y          manually specified middle position
       --opendisk=radius     radius of the opendisk
       --closedisk=radius    radius of the closedisk
 ```

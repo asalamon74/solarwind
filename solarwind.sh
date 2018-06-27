@@ -17,6 +17,7 @@ usage() {
     echo ""
     echo "Options:"
     echo "  -h, --help                  display this help"
+    echo "      --middle=x,y            manually specified middle position"
     echo "      --opendisk=radius       radius of the opendisk"
     echo "      --closedisk=radius      radius of the closedisk"
     echo "      --radialblur=angle      angle of the radial blur"
@@ -47,6 +48,10 @@ case $i in
     ;;
     --closedisk=*)
     closedisk="${i#*=}"
+    shift # past argument=value
+    ;;
+    --middle=*)
+    middlestr="${i#*=}"
     shift # past argument=value
     ;;
     --radialblur=*)
@@ -89,7 +94,11 @@ inputbase=${inputbase%.*}
 
 MYDIR="$(dirname "$(realpath "$0")")"
 
-"${MYDIR}/solarmiddle.sh" --opendisk="${opendisk}" --closedisk="${closedisk}" "$1" "${SWTMPDIR}/${inputbase}_cuta.png" || error "CANNOT POSITION IMAGE"
+if [ -n "$middlestr" ]; then
+    middlearg="--middle=$middlestr"
+fi
+
+"${MYDIR}/solarmiddle.sh" --opendisk="${opendisk}" --closedisk="${closedisk}" ${middlearg} "$1" "${SWTMPDIR}/${inputbase}_cuta.png" || error "CANNOT POSITION IMAGE"
 
 fsizex=$(identify -ping -format "%w" "${SWTMPDIR}/${inputbase}_cuta.png")
 fsizey=$(identify -ping -format "%h" "${SWTMPDIR}/${inputbase}_cuta.png")
