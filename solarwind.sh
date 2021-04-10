@@ -84,10 +84,8 @@ fi
 
 mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 
-
 [ "$inputfile" = "" ] && error "NO INPUT FILE SPECIFIED"
 [ "$outputfile" = "" ] && error "NO OUTPUT FILE SPECIFIED"
-
 
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
