@@ -49,7 +49,7 @@ case $i in
     ;;
     --middle=*)
     middlestr="${i#*=}"
-    middlepos=(${middlestr//,/ })
+    IFS=',' read -ra middlepos <<< "${middlestr}"
     shift # past argument=value
     ;;
     # --default)
