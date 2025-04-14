@@ -30,6 +30,11 @@ error() {
     exit 1
 }
 
+error_nousage() {
+    echo "$1"
+    exit 1
+}
+
 # defaults
 opendisk=2
 closedisk=30
@@ -92,7 +97,7 @@ inputbase=${inputbase%.*}
 
 MYDIR="$(dirname "$(realpath "$0")")"
 
-"${MYDIR}/solarmiddle.sh" --opendisk="${opendisk}" --closedisk="${closedisk}" ${middlestr:+"--middle=$middlestr"} "$1" "${SWTMPDIR}/${inputbase}_cuta.png" || error "CANNOT POSITION IMAGE"
+"${MYDIR}/solarmiddle.sh" --opendisk="${opendisk}" --closedisk="${closedisk}" ${middlestr:+"--middle=$middlestr"} "$1" "${SWTMPDIR}/${inputbase}_cuta.png" || error_nousage "CANNOT POSITION IMAGE"
 
 fsizex=$(identify -ping -format "%w" "${SWTMPDIR}/${inputbase}_cuta.png")
 fsizey=$(identify -ping -format "%h" "${SWTMPDIR}/${inputbase}_cuta.png")
