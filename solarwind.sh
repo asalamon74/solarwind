@@ -120,7 +120,7 @@ if [ "$nomiddle" = true ] ; then
     fi
     cp "$1" "${SWTMPDIR}/${inputbase}_cuta.png"
     OLDIFS=$IFS
-    IFS=',' tokens=( ${middlepos} )
+    IFS=',' tokens=( "${middlepos}" )
     IFS=$OLDIFS
     shiftx=$((tokens[0]-sizex/2))
     shifty=$((tokens[1]-sizey/2))
@@ -139,12 +139,13 @@ fi
 fsizex=$(identify -ping -format "%w" "${SWTMPDIR}/${inputbase}_cuta.png")
 fsizey=$(identify -ping -format "%h" "${SWTMPDIR}/${inputbase}_cuta.png")
 
+# shellcheck disable=SC2086
 convert "${SWTMPDIR}/${inputbase}_cuta.png" \
     \( -size "${fsizex}"x"${fsizey}" ${gradientpos} radial-gradient:black-white -gamma 0.3 \) \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
     \( -clone 0 -clone 2 -compose Minus -composite \) \
-    \( +clone -auto-level -modulate ${modulate} +dither -colors 2 -colorspace gray -contrast-stretch 0 \) \
+    \( +clone -auto-level -modulate "${modulate}" +dither -colors 2 -colorspace gray -contrast-stretch 0 \) \
     \( +clone -blur 20x20 \) \
     \( -clone 5 -negate \) \
     \( +clone -blur 20x20 \) \
