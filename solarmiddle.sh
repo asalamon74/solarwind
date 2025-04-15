@@ -95,7 +95,7 @@ if [ -z "${middlepos[0]}" ] || [ -z "${middlepos[1]}" ]; then
     trimbox=$(convert "${SWTMPDIR}/${inputbase}_mask.png" -trim -format "%X %Y %@" info:);
     bsize=$(echo "$trimbox" | cut -f 3 -d ' ' | cut -f 1 -d '+')
     bsizex=$(echo "$bsize" | cut -f 1 -d 'x')
-    if [ $bsizex -le 10 ]; then
+    if [ "$bsizex" -le 10 ]; then
         error_nousage "CANNOT PROCESS IMAGE"
     fi
     bsizey=$(echo "$bsize" | cut -f 2 -d 'x')
