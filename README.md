@@ -12,7 +12,9 @@ Options:
       --opendisk=radius       radius of the opendisk
       --closedisk=radius      radius of the closedisk
       --radialblur=angle      angle of the radial bluar
+      --modulate=brightness   brightness value for modulate (default: 200)
       --middleoutputfile=file if specified the middle positioned image will also be saved
+      --nomiddle              do not position the image
 ```
 
 ## Sample
@@ -27,7 +29,12 @@ The package also contains the solarmiddle script which automatically positiones 
 It is also possible to specify the middle position manually using the `--middle` option.
 
 ```
-Usage: solarmiddle.sh [options] inputfile outputfile
+Usage:
+  solarmiddle.sh [options] inputfile outputfile
+ or
+  solarmiddle.sh [options] inputfile
+
+If no output file is specified, only prints out the middle position
 
 Options:
   -h, --help                display this help
