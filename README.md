@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/asalamon74/solarwind.svg?branch=master)](https://travis-ci.com/asalamon74/solarwind)
+![Build Status](https://github.com/asalamon74/solarwind/actions/workflows/shellcheck.yml/badge.svg)
 
 # solarwind
 Total solar eclipse corona/solarwind enhancer [imagemagick](http://www.imagemagick.org) script. The steps of the script are described [here](solarwind_tutorial.md).
