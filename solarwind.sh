@@ -21,6 +21,7 @@ usage() {
     echo "      --opendisk=radius       radius of the opendisk"
     echo "      --closedisk=radius      radius of the closedisk"
     echo "      --radialblur=angle      angle of the radial blur"
+    echo "      --modulate=brightness   brightness value for modulate (default: 200)"
     echo "      --middleoutputfile=file if specified the middle positioned image will also be saved"
     echo "      --nomiddle              do not position the image"
 }
@@ -40,6 +41,7 @@ error_nousage() {
 opendisk=2
 closedisk=30
 radialblur=10
+modulate=200
 nomiddle=false
 
 for i in "$@"
@@ -63,6 +65,10 @@ case $i in
     ;;
     --radialblur=*)
     radialblur="${i#*=}"
+    shift # past argument=value
+    ;;
+    --modulate=*)
+    modulate="${i#*=}"
     shift # past argument=value
     ;;
     --middleoutputfile=*)
@@ -138,7 +144,7 @@ convert "${SWTMPDIR}/${inputbase}_cuta.png" \
     \( -clone 0 -colorspace gray \) \
     \( -clone 0 -clone 1 -compose Multiply -composite -normalize \) \
     \( -clone 0 -clone 2 -compose Minus -composite \) \
-    \( +clone -auto-level -modulate 200 +dither -colors 2 -colorspace gray -contrast-stretch 0 \) \
+    \( +clone -auto-level -modulate ${modulate} +dither -colors 2 -colorspace gray -contrast-stretch 0 \) \
     \( +clone -blur 20x20 \) \
     \( -clone 5 -negate \) \
     \( +clone -blur 20x20 \) \
