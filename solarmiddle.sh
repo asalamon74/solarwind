@@ -14,6 +14,10 @@ trap cleanup INT TERM EXIT
 usage() {
     echo "Usage:"
     echo "  $(basename "$0") [options] inputfile outputfile"
+    echo " or "
+    echo "  $(basename "$0") [options] inputfile"
+    echo ""
+    echo "If no output file is specified, only prints out the middle position"
     echo ""
     echo "Options:"
     echo "  -h, --help                display this help"
@@ -81,7 +85,7 @@ mkdir "$SWTMPDIR" || error "CANNOT CREATE TEMPORARY FILE DIRECTORY"
 
 
 [ "$inputfile" = "" ] && error "NO INPUT FILE SPECIFIED"
-[ "$outputfile" = "" ] && error "NO OUTPUT FILE SPECIFIED"
+#[ "$outputfile" = "" ] && error "NO OUTPUT FILE SPECIFIED"
 
 inputbase=${inputfile##*/}
 inputbase=${inputbase%.*}
@@ -107,10 +111,15 @@ else
     midx=${middlepos[0]}
     midy=${middlepos[1]}
 fi
-iwidth=$(identify -ping -format "%w" "${inputfile}")
-iheight=$(identify -ping -format "%h" "${inputfile}")
-fsizex=$((midx > iwidth-midx ? 2*(iwidth-midx) : 2*midx))
-fsizey=$((midy > iheight-midy ? 2*(iheight-midy) : 2*midy))
-TOPX=$((midx-fsizex/2))
-TOPY=$((midy-fsizey/2))
-convert "${inputfile}" -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage "${outputfile}"
+
+if [ -n "$outputfile" ]; then
+    iwidth=$(identify -ping -format "%w" "${inputfile}")
+    iheight=$(identify -ping -format "%h" "${inputfile}")
+    fsizex=$((midx > iwidth-midx ? 2*(iwidth-midx) : 2*midx))
+    fsizey=$((midy > iheight-midy ? 2*(iheight-midy) : 2*midy))
+    TOPX=$((midx-fsizex/2))
+    TOPY=$((midy-fsizey/2))
+    convert "${inputfile}" -crop ${fsizex}x${fsizey}+${TOPX}+${TOPY} +repage "${outputfile}"
+else
+    echo "${midx}","${midy}"
+fi
