@@ -120,7 +120,7 @@ if [ "$nomiddle" = true ] ; then
     fi
     cp "$1" "${SWTMPDIR}/${inputbase}_cuta.png"
     OLDIFS=$IFS
-    IFS=',' tokens=( "${middlepos}" )
+    IFS="," read -r -a tokens <<< "$middlepos"
     IFS=$OLDIFS
     shiftx=$((tokens[0]-sizex/2))
     shifty=$((tokens[1]-sizey/2))
